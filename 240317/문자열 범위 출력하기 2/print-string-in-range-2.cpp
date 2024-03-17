@@ -8,7 +8,7 @@ int main() {
     cin >> n;
 
     if (str.length()<=n){
-
+        cout << str;
     }
     else{
         string::iterator iter;
