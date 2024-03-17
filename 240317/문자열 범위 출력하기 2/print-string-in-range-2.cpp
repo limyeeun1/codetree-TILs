@@ -7,17 +7,18 @@ int main() {
     int n;
     cin >> n;
 
-    if (str.length()<=n){
-        cout << str;
+    // if (str.length()<=n){
+    //     cout << str;
+    // }
+    // else{
+    string::iterator iter;
+    int count=0;
+    for(iter = str.end()-1;count<n;iter--){
+        cout << *iter;
+        count ++;
+        if (count==str.length()){break;}
     }
-    else{
-        string::iterator iter;
-        int count=0;
-        for(iter = str.end()-1;count<n;iter--){
-            cout << *iter;
-            count ++;
-        }
-    }
+    // }
 
     return 0;
 }
