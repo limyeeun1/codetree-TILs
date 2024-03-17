@@ -8,6 +8,7 @@ int main() {
         cin >> arr[i];
     }
     char alp;
+    int count=0;
     cin >> alp;
 
     string::iterator iter;
@@ -15,8 +16,10 @@ int main() {
         iter = arr[i].end() -1;
         if (*iter == alp){
             cout << arr[i] << endl;
+            count ++;
         }
     }
+    if (count == 0){cout << "None";}
 
     return 0;
 }
