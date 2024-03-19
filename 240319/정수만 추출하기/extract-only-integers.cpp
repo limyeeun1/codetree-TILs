@@ -14,6 +14,9 @@ int main() {
             // cout << "a" << a;
             break;
         }
+        else if(i==A.length()-1){
+            a = stoi(A);
+        }
     }
     for (int i=0; i<B.length(); i++){
         int asc = (int) B[i];
@@ -22,6 +25,9 @@ int main() {
             b = stoi(t);
             // cout << "b" << b;
             break;
+        }
+        else if(i==B.length()-1){
+            b = stoi(B);
         }
     }
     cout << a+b << endl;
