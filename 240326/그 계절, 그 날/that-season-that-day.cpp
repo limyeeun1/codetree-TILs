@@ -26,7 +26,7 @@ int main() {
     cin>> Y >> M >> D;
 
     int ld = last_day(M);
-    if (M==2 && check_yoon(Y)==ture){ld =29;}
+    if (M==2 && check_yoon(Y)=ture){ld =29;}
     if (D>ld){cout <<"-1";return 0;}
 
     seasons(M);
