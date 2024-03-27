@@ -4,7 +4,7 @@ using namespace std;
 
 int check_(string &str){
     string::iterator iter;
-    for(iter=str.begin();iter!=str.end()-2;iter++){
+    for(iter=str.begin();iter!=str.end()-1;iter++){
         if (*iter!=*(iter+1)){cout << "Yes";return 0;}
     }
     cout << "No";
