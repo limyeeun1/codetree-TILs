@@ -14,7 +14,7 @@ int main() {
         return 0;}
     else {
         make(b,a);
-        cout << b << " " << a;
+        cout << a << " " << b;
         return 0;}
 
 
