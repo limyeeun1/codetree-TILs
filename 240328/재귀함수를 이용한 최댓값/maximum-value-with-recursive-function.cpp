@@ -15,7 +15,7 @@ int main() {
     cin >> n;
     int v;
     cin >> v;
-    cout << find_max(5,v);
+    cout << find_max(n-1,v);
 
 
     return 0;
