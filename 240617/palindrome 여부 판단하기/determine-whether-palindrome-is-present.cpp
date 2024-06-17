@@ -4,10 +4,18 @@ using namespace std;
 
 void Is_palindrome(string &str, int N){
     int n=0;
-    // for (iter = str.begin(); i÷ter !=str.end(); iter ++){
-    for (int i=0; i<N/2 ; i++){
+    string::iterator iter;
+    for (iter = str.begin(); iter !=str.end(); iter ++){
+    // for (int i=0; i<N/2 ; i++){
 
-        if (str[n] != str[N-n-1]){
+        // if (str[n] != str[N-n-1]){
+        //     cout << "No";
+        //     return;
+        // }
+        // n++;
+    // }
+
+        if (*(iter) != *(str.end()-1-n)){
             cout << "No";
             return;
         }
@@ -15,6 +23,7 @@ void Is_palindrome(string &str, int N){
     }
     cout << "Yes";
     return;
+    
 
 }
 
