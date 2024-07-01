@@ -9,6 +9,7 @@ int main() {
     string days;
     int day;
     cin >>m1 >> d1 >> m2 >> d2;
+    cin >> days;
     if (days == "Mon"){day =1;}
     else if(days =="Tue"){day =2;}
     else if(days =="Wed"){day =3;}
@@ -16,7 +17,7 @@ int main() {
     else if(days =="Fri"){day =5;}
     else if (days == "Sat"){day = 6;}
     else if (days == "Sun"){day =7;}
-
+    // cout <<"day" << day << endl;
 
     int number=1;
     while(1){
