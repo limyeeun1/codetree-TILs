@@ -15,7 +15,7 @@ int main() {
     else if(days =="Thu"){day =4;}
     else if(days =="Fri"){day =5;}
     else if (days == "Sat"){day = 6;}
-    else if (days == "Sum"){day =7;}
+    else if (days == "Sun"){day =7;}
 
 
     int number=1;
@@ -30,6 +30,8 @@ int main() {
             d1 =1;
         }
     }
+    // cout << number << endl;
+    // cout << number%7<< endl;
     if (number%7 >= day){
         cout << number/7+1;
     }
