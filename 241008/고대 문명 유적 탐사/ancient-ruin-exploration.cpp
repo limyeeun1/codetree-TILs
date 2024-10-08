@@ -182,7 +182,7 @@ int main() {
         //fill_civil()
         // t_answer += rotate_find(civil,9,0,true);
         //answer += t_answer;
-        cout << answer << " " << end;
+        cout << answer << " " << endl;
     }
     return 0;
 }
