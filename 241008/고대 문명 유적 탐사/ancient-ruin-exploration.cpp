@@ -141,7 +141,7 @@ void fill_civil(){
 int main() {
     // 고대 유물 입력받기
     int K,M; cin >> K >> M;
-    int temp,answer=0;
+    int temp;
     for (int i=1; i<6; i++){
         for (int j=0; j<6; j++){
             if (j==0){civil[i].push_back(0);}
@@ -152,6 +152,7 @@ int main() {
     
     // 알고리즘 시작하기 
     for (int i=0; i<K; i++){
+        int answer=0;
         bool find=false;
         // int t_answer=0;
         pair<int,int> what_to_r(9,3);
@@ -181,7 +182,7 @@ int main() {
         //fill_civil()
         // t_answer += rotate_find(civil,9,0,true);
         //answer += t_answer;
+        cout << answer << " " << end;
     }
-    cout << answer << endl;
     return 0;
 }
