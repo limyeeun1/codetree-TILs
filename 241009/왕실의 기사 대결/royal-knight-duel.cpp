@@ -12,11 +12,18 @@ vector<int> dx = { 0,1,0,-1 };
 int L,N;
 
 bool check_index(int i, int j, const vector<vector<int>>& chess) {
-    if (chess[i][j] == 2) { return false; }
     if (i <= 0 or i > L) { return false; }
     if (j <= 0 or j > L) { return false; }
+    if (chess[i][j] == 2) { return false; }
+
     return true;
 }
+bool double_check(int i, int j) {
+    if (i <= 0 or i > L) { cout << "error"; return false; }
+    if (j <= 0 or j > L) { cout << "error"; return false; }
+    return true;
+}
+
 
 int push(vector<vector<int>>& chess, vector<vector<pair<int, int>>>& worriers, int i, int d, vector<vector<int>>& worrier) {
     int ans=0;
@@ -56,15 +63,20 @@ int push(vector<vector<int>>& chess, vector<vector<pair<int, int>>>& worriers, i
         }
 
     }
-    // cout << "it can!" << endl;
-    // 밀고 전사들의 체력 UPDATE하기(worrier 랑 worriers 둘 다) 동시에 ANSWER RETURN 해야함
-    // set에서 꺼내서 worriers update 
+
+    // 직접 밀기 worriers update(위치 및 체력) 
     int w;
     for (auto iter = s.begin(); iter != s.end(); iter++) {
         w = *iter;
         for (it = worriers[w].begin() + 1; it != worriers[w].end(); it++) {
+
             it->first += dy[d];
             it->second += dx[d];
+            y = it->first;
+            x = it->second;
+            if (chess[y][x] == 1 && w!=i) { 
+                worriers[w].begin()->first--; }
+
         }
     }
     //worriers로 worrier update 하기
@@ -76,14 +88,16 @@ int push(vector<vector<int>>& chess, vector<vector<pair<int, int>>>& worriers, i
     }
     // update하기
     for (int p = 1; p <= N; p++) {
-        for (it = worriers[w].begin() + 1; it != worriers[w].end(); it++) {
+        for (it = worriers[p].begin() + 1; it != worriers[p].end(); it++) {
             y = it->first;
             x = it->second;
-            worrier[y][x] = p;
-            if (chess[y][x] == 1 && p!=i) {
-                worriers[p][0].first--;//체력깎기
-                ans++;//answer count
-            }
+            // 체력이 있을 때만 UPDATE
+            if (worriers[p].begin()->first > 0) {
+                worrier[y][x] = p;}
+            //if (chess[y][x] == 1 && p!=i) {
+            //    worriers[p][0].first--;//체력깎기
+            //    ans++;//answer count
+            //}
         }
     }
     return ans;
@@ -121,6 +135,7 @@ int main() {
         worriers[i].push_back({ k,i });
         for (int j = 0; j < h; j++) {
             for (int l = 0; l < w; l++) {
+                double_check(r + j, c + l);
                 worriers[i].push_back({ r + j,c + l });
                 worrier[r + j][c + l] = i;
             }
@@ -129,22 +144,24 @@ int main() {
     vector<vector<pair<int, int>>> worriers_copy(worriers);
 
     // 왕의 명령 
-    //for (int l = 0; l < Q; l++) {
-    //    int i, d;
-    //    cin >> i >> d;
-    //    answer += push(chess, worriers, i, d, worrier);
-    //    cout << l << " " << answer << endl;
-    //}
-    int q, a, e, t, b, x;
-    cin >> q >> a >> e >> t >> b >> x;
-    answer += push(chess, worriers, q, a, worrier);
-    answer += push(chess, worriers, e, t, worrier);
-    answer += push(chess, worriers, b, x, worrier);
+    for (int l = 0; l < Q; l++) {
+        int i, d;
+        cin >> i >> d;
+
+        answer += push(chess, worriers, i, d, worrier);
+
+        //cout << l << " " << answer << endl;
+    }
+    //int q, a, e, t, b, x;
+    //cin >> q >> a >> e >> t >> b >> x;
+    //answer += push(chess, worriers, q, a, worrier);
+    //answer += push(chess, worriers, e, t, worrier);
+    //answer += push(chess, worriers, b, x, worrier);
 
     int real_answer = 0;
     // worrier의 체력이 0이 아니면, 첫 체력과 비교 
     for (int i = 1; i <= N; i++) {
-        if (worriers[i][0].first == 0) { continue; }
+        if (worriers[i][0].first <= 0) { continue; }
         real_answer += (worriers_copy[i][0].first) - (worriers[i][0].first);
     }
 
