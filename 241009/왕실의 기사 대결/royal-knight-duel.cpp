@@ -75,7 +75,8 @@ int push(vector<vector<int>>& chess, vector<vector<pair<int, int>>>& worriers, i
             y = it->first;
             x = it->second;
             if (chess[y][x] == 1 && w!=i) { 
-                worriers[w].begin()->first--; }
+                worriers[w].begin()->first--;
+                if(worriers[w].begin()->first==0){break;} }
 
         }
     }
