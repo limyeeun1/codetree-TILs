@@ -168,7 +168,7 @@ void push_santa_4(int n, int r, int c, int i) {
 		if (map[r][c] == 1) {
 			// 해당 자리에 있는 산타 번호 찾아서
 			int n = find_santa_with_rc(r, c);
-			push_santa(n, r + dy_s[i], c + dx_s[i], i);
+			push_santa_4(n, r + dy_s[i], c + dx_s[i], i);
 		}
 		// map update 및 santa vector 업데이트
 		map[r][c] = 1;
