@@ -70,12 +70,19 @@ bool check_index(int y, int x) {
 }
 
 bool cal_distance(Santa s1, Santa s2) { // 자..class SANTA가 대상임!!
-	int d1 = (s1.r - Ri) * (s1.r - Ri) + (s1.c - Rj) * (s1.c - Rj), d2 = (s2.r - Ri) * (s2.r - Ri) + (s2.c - Rj) * (s2.c - Rj);
-	if (d1 == d2) {
-		if (s1.r == s2.r) { return s1.c > s2.c; }
-		return s1.r > s2.r;
+	// r,c가 음수인걸 걸러야함
+	if (s1.r <= 0 && s2.r > 0) return false;
+	if (s1.r > 0 && s2.r <= 0) return true;
+	//둘 다 음수가 아니라면
+	if (s1.r > 0 && s2.c > 0) {
+		int d1 = (s1.r - Ri) * (s1.r - Ri) + (s1.c - Rj) * (s1.c - Rj), d2 = (s2.r - Ri) * (s2.r - Ri) + (s2.c - Rj) * (s2.c - Rj);
+		if (d1 == d2) {
+			if (s1.r == s2.r) { return s1.c > s2.c; }
+			return s1.r > s2.r;
+		}
+		return d1 < d2;
 	}
-	return d1 < d2;
+	return false;
 }
 
 int find_index(int r, int c) {
