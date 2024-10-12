@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <ctime>
 using namespace std;
 
 int N, m;
@@ -41,15 +42,14 @@ int cal_distance(int y1, int x1, int y2, int x2) { // from x1,y1, to x2,y2 // �
     queue<pair<int,int>> q;
     queue<int> d;
     vector<vector<int>> visited_map(N+1, vector<int> (N+1));
-    int value=0;
     //visited_map.resize(N + 1, vector<int>(N + 1));
     // initialize_visitmap();
     q.push({ y1,x1 });
     d.push({ 0 });
     while (q.empty() == false) {
         int y = q.front().first, x = q.front().second; // 꺼내기
-        value= d.front();
-        if (y == y2 && x == x2) { return value; } // 종료조건
+        int value= d.front();
+        if (y == y2 && x == x2) { return d.front(); } // 종료조건
         q.pop(); d.pop();
 
         visited_map[y][x] = 1;
@@ -64,7 +64,7 @@ int cal_distance(int y1, int x1, int y2, int x2) { // from x1,y1, to x2,y2 // �
             d.push(value+1);
         }
     }
-    return value;
+    return 0;
 
 }
 
@@ -218,6 +218,7 @@ int main() {
     init(); // 격자정보, 편의점 정보 획득
 
 
+
     for (current_time = 1; 1>0 ; current_time++) { // 사실상 무한 루프 임.
 
         one();
@@ -229,5 +230,6 @@ int main() {
         if (check_mission_clear() == true) { cout << current_time; break; }
 
     }
+
     return 0;
 }
