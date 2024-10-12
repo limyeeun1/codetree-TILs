@@ -65,7 +65,7 @@ int cal_distance(int y1, int x1, int y2, int x2) { // from x1,y1, to x2,y2 // ë§
             d.push(value+1);
         }
     }
-    return 0;
+    //return 0;
 
 }
 
