@@ -48,7 +48,7 @@ int cal_distance(int y1, int x1, int y2, int x2) { // from x1,y1, to x2,y2 // �
     while (q.empty() == false) {
         int y = q.front().first, x = q.front().second; // 꺼내기
         int value= d.front();
-        if (y == y2 && x == x2) { break; } // 종료조건
+        if (y == y2 && x == x2) { return value; } // 종료조건
         q.pop(); d.pop();
 
         visited_map[y][x] = 1;
@@ -63,7 +63,7 @@ int cal_distance(int y1, int x1, int y2, int x2) { // from x1,y1, to x2,y2 // �
             d.push(value+1);
         }
     }
-    return d.front();
+
 
 }
 
