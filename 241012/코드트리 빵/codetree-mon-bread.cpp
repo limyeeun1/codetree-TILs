@@ -6,6 +6,7 @@ using namespace std;
 
 int N, m;
 int current_time;
+int visited_map[16+1][16+1];
 
 vector<vector<int> > map;
 //vector<vector<int> > store_map;
@@ -30,20 +31,20 @@ bool check_index(int y, int x){
 //    //맨해튼 distance로 갈 수 없는 경우에 대한 처리 
 //} 
 
-//void initialize_visitmap() {
-//    for (int i = 0; i < N + 1; i++) {
-//        for (int j = 0; j < N + 1; j++) {
-//            visited_map[i][j] = 0;
-//        }
-//    }
-//}
+void initialize_visitmap() {
+   for (int i = 0; i < N + 1; i++) {
+       for (int j = 0; j < N + 1; j++) {
+           visited_map[i][j] = 0;
+       }
+   }
+}
 
 int cal_distance(int y1, int x1, int y2, int x2) { // from x1,y1, to x2,y2 // 막힌 벽 map 에서 2를 맡고 있음
     queue<pair<int,int>> q;
     queue<int> d;
-    vector<vector<int>> visited_map(N+1, vector<int> (N+1));
+    //vector<vector<int>> visited_map(N+1, vector<int> (N+1));
     //visited_map.resize(N + 1, vector<int>(N + 1));
-    // initialize_visitmap();
+    initialize_visitmap();
     q.push({ y1,x1 });
     d.push({ 0 });
     while (q.empty() == false) {
