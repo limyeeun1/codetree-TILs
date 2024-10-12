@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 using namespace std;
 
 int N, m;
@@ -21,11 +22,38 @@ bool check_index(int y, int x){
     return true;
 }
 
+//int cal_distance(int y1, int x1, int y2, int x2) { // from x1,y1, to x2,y2 // 막힌 벽 map 에서 2를 맡고 있음
+//    //맨해튼 distance로 갈 수 있는지 확인, return
+//    return abs(y1 - y2) + abs(x1 - x2);
+//    //맨해튼 distance로 갈 수 없는 경우에 대한 처리 
+//} 
+
 int cal_distance(int y1, int x1, int y2, int x2) { // from x1,y1, to x2,y2 // 막힌 벽 map 에서 2를 맡고 있음
-    //맨해튼 distance로 갈 수 있는지 확인, return
-    return abs(y1 - y2) + abs(x1 - x2);
-    //맨해튼 distance로 갈 수 없는 경우에 대한 처리 
-} 
+    queue<pair<int,int>> q;
+    queue<int> d;
+    vector<vector<int>> visited_map(N+1, vector<int> (N+1));
+    q.push({ y1,x1 });
+    d.push({ 0 });
+    while (q.empty() == false) {
+        int y = q.front().first, x = q.front().second; // 꺼내기
+        int value= d.front();
+        if (y == y2 && x == x2) { return d.front(); } // 종료조건
+        q.pop(); d.pop();
+
+        visited_map[y][x] = 1;
+        
+        // 주변 노드 넣기, 값도 같이 넣기 
+        for (int k = 0; k < 4; k++) {
+            int i = y + dy[k], j = x + dx[k];
+            if (check_index(i, j) == false) { continue; }// index 
+            if (visited_map[i][j] == 1) { continue; }
+            if (map[i][j] == 2) { continue; }// 벽인지 아닌지
+            q.push({ i,j });
+            d.push(value+1);
+        }
+    }
+
+}
 
 int where_to_go(int p) { // 현재 위치로부터 편의점 방향으로 가는 것임.
     // people[p-1] // 현재 위치 
@@ -69,6 +97,30 @@ void two() {
 
 }
 
+
+
+//pair<int, int> which_basecamp(int p) {
+//    //편의점 위치 
+//    int y = c_store[p - 1].first, x = c_store[p - 1].second;
+//
+//    // 8개를 순서대로 탐색하면 됨 //
+//        // 벽이 있으면 탈락..인데 영구탈락? .. oo..
+//    // 아니면 모든 베이스 캠프에 대해서 탐색하는 방법도 있음 //이게 빠르긴 할 듯
+//    // 벽으로 막힌거 고려 안함
+//    int yy=0, xx=0;
+//    int distance = 2 * N;
+//    for (int i = 1; i <= N; i++) {
+//        for (int j = 1; j <= N; j++) {
+//            if (map[i][j] != 1) { continue; }
+//            if (map[i][j] == 2) { continue; }
+//            int dis = abs(y - i) + abs(x - j);
+//            if (dis < distance) { distance = dis; yy = i; xx = j; }
+//        }
+//    }
+//    if (yy == 0) { cout << "error"; }
+//    return { yy,xx };
+//}
+
 pair<int, int> which_basecamp(int p) {
     //편의점 위치 
     int y = c_store[p - 1].first, x = c_store[p - 1].second;
@@ -77,16 +129,17 @@ pair<int, int> which_basecamp(int p) {
         // 벽이 있으면 탈락..인데 영구탈락? .. oo..
     // 아니면 모든 베이스 캠프에 대해서 탐색하는 방법도 있음 //이게 빠르긴 할 듯
     // 벽으로 막힌거 고려 안함
-    int yy, xx;
+    int yy = 0, xx = 0;
     int distance = 2 * N;
     for (int i = 1; i <= N; i++) {
         for (int j = 1; j <= N; j++) {
             if (map[i][j] != 1) { continue; }
             if (map[i][j] == 2) { continue; }
-            int dis = abs(y - i) + abs(x - j);
+            int dis = cal_distance(y, x, i, j);
             if (dis < distance) { distance = dis; yy = i; xx = j; }
         }
     }
+    if (yy == 0) { cout << "error"; }
     return { yy,xx };
 }
 
