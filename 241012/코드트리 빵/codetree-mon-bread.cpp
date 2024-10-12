@@ -11,6 +11,7 @@ vector<vector<int> > map;
 
 vector<pair<int, int>> people;
 vector<pair<int, int> > c_store;
+vector<vector<int>> visited_map;
 vector<int> mission_clear;
 
 const vector<int> dy = { -1,0,0,1 };
@@ -31,7 +32,8 @@ bool check_index(int y, int x){
 int cal_distance(int y1, int x1, int y2, int x2) { // from x1,y1, to x2,y2 // 막힌 벽 map 에서 2를 맡고 있음
     queue<pair<int,int>> q;
     queue<int> d;
-    vector<vector<int>> visited_map(N+1, vector<int> (N+1));
+    //vector<vector<int>> visited_map(N+1, vector<int> (N+1));
+    visited_map.resize(N + 1, vector<int>(N + 1));
     q.push({ y1,x1 });
     d.push({ 0 });
     while (q.empty() == false) {
