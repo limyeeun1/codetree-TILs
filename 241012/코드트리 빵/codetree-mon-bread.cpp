@@ -165,7 +165,8 @@ void three(){
     int tp = current_time;
     
     // basecamp 탐색 (편의점 위치로부터 탐색, )
-    pair<int,int> loc = which_basecamp(tp);
+    //pair<int,int> loc = which_basecamp(tp);
+    pair<int,int>loc = {1,2};
     // basecamp로 이동
     people[tp - 1].first = loc.first;
     people[tp - 1].second = loc.second;
