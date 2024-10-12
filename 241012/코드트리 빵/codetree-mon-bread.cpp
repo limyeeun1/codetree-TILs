@@ -82,6 +82,7 @@ pair<int, int> which_basecamp(int p) {
     for (int i = 1; i <= N; i++) {
         for (int j = 1; j <= N; j++) {
             if (map[i][j] != 1) { continue; }
+            if (map[i][j] == 2) { continue; }
             int dis = abs(y - i) + abs(x - j);
             if (dis < distance) { distance = dis; yy = i; xx = j; }
         }
